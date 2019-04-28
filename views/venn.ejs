@@ -1,0 +1,503 @@
+
+<%- include partials/header.ejs %>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="venn.js"></script>
+
+<script>
+    $(document).ready(()=>{
+        $('tspan.Atool')
+            .attr("data-html", "true")
+            .attr("data-placement", "Left")
+
+        $('tspan.Atool').on("mouseenter",()=>{ 
+            $('tspan.Atool')
+            .tooltip('show')
+        })
+        $('tspan.Atool').hover(()=>{
+            $("tspan.Atool").css("font-weight", "");
+        })
+        $('tspan.Atool').on("mouseover",()=>{ 
+            $('tspan.Atool')
+            .tooltip('hide')
+            $("tspan.Atool").css("font-weight", "bold");
+        })
+
+        $('tspan.Btool').on("mouseenter",()=>{ $('tspan.Btool')
+            .attr("data-html", "true")
+            .attr("data-placement", "Right")
+            .tooltip('show');
+        })
+        $('tspan.Btool').hover(()=>{
+            $("tspan.Btool").css("font-weight", "");
+        })
+        $('tspan.Btool').on("mouseover",()=>{ 
+            $('tspan.Btool')
+            .tooltip('hide')
+            $("tspan.Btool").css("font-weight", "bold");
+        })
+
+
+        $('tspan.Ctool').on("mouseenter",()=>{ $('tspan.Ctool')
+            .attr("data-html", "true")
+            .attr("data-placement", "Right")
+            .tooltip('show');
+        })
+        $('tspan.Ctool').hover(()=>{
+            $("tspan.Ctool").css("font-weight", "");
+        })
+        $('tspan.Ctool').on("mouseover",()=>{ 
+            $('tspan.Ctool')
+            .tooltip('hide')
+            $("tspan.Ctool").css("font-weight", "bold");
+        })
+
+
+        $('tspan.Dtool').on("mouseenter",()=>{ 
+            $('tspan.Dtool')
+            .attr("data-placement", "Left")
+            .tooltip('show');
+        })
+        $('tspan.Dtool').hover(()=>{
+            $("tspan.Dtool").css("font-weight", "");
+        })
+        $('tspan.Dtool').on("mouseover",()=>{ 
+            $('tspan.Dtool')
+            .tooltip('hide')
+            $("tspan.Dtool").css("font-weight", "bold");
+        })
+
+        $('tspan.Mission').on("mouseenter",()=>{ 
+            $('tspan.Mission')
+            .attr("data-placement", "Left")
+            .tooltip('show');
+        })
+        $('tspan.Mission').hover(()=>{
+            $("tspan.Mission").css("font-weight", "");
+        })
+        $('tspan.Mission').on("mouseover",()=>{ 
+            $('tspan.Mission')
+            .tooltip('hide')
+            $("tspan.Mission").css("font-weight", "bold");
+        })
+
+        $('tspan.Vocation').on("mouseenter",()=>{ 
+            $('tspan.Vocation')
+            .attr("data-placement", "Top")
+            .tooltip('show');
+        })
+        $('tspan.Vocation').hover(()=>{
+            $("tspan.Vocation").css("font-weight", "");
+        })
+        $('tspan.Vocation').on("mouseover",()=>{ 
+            $('tspan.Vocation')
+            .tooltip('hide')
+            $("tspan.Vocation").css("font-weight", "bold");
+        })
+
+        $('tspan.Passion').on("mouseenter",()=>{ 
+            $('tspan.Passion')
+            .attr("data-placement", "Bottom")
+            .tooltip('show');
+        })
+        $('tspan.Passion').hover(()=>{
+            $("tspan.Passion").css("font-weight", "");
+        })
+        $('tspan.Passion').on("mouseover",()=>{ 
+            $('tspan.Passion')
+            .tooltip('hide')
+            $("tspan.Passion").css("font-weight", "bold");
+        })
+
+        $('tspan.Profession').on("mouseenter",()=>{ 
+            $('tspan.Profession')
+            .attr("data-placement", "Right")
+            .tooltip('show');
+        })
+        $('tspan.Profession').hover(()=>{
+            $("tspan.Profession").css("font-weight", "");
+        })
+        $('tspan.Profession').on("mouseover",()=>{ 
+            $('tspan.Profession')
+            .tooltip('hide')
+            $("tspan.Profession").css("font-weight", "bold");
+        })
+
+        $('tspan.Purpose').on("mouseenter",()=>{ 
+            $('tspan.Purpose')
+            .attr("data-placement", "Top")
+            .tooltip('show');
+        })
+        $('tspan.Purpose').hover(()=>{
+            $("tspan.Purpose").css("font-weight", "");
+        })
+        $('tspan.Purpose').on("mouseover",()=>{ 
+            $('tspan.Purpose')
+            .tooltip('hide')
+            $("tspan.Purpose").css("font-weight", "bold");
+        })
+
+
+        $.get("/ans").then((data)=>{
+            s = data[0].question1;
+            var a = "<div class= 'btn primary-color'> Question1: </div>";
+            var b = "<ul class='p-0 m-0'>";
+            s.forEach(element => {
+                a = a+"<div class= 'btn btn-default'> "+element+"</div>";
+                b = b+ "<li>"+element+"</li>";
+            });
+            a = a+"</div>";
+            b = b +"</ul>";
+            $("#ques1").html(a);
+
+            $('tspan.Atool')
+            .attr("data-html", "true")
+            .attr('data-title', b)
+
+            s = data[0].question2;
+            var a = "<div class= 'btn primary-color'> Question2: </div>";
+            var b = "<ul class='p-0 m-0'>";
+            s.forEach(element => {
+                a = a+"<div class= 'btn btn-default'> "+element+"</div>";
+                b = b+ "<li>"+element+"</li>";
+            });
+            a = a+"</div>";
+            b = b +"</ul>";
+            $("#ques2").html(a);
+            $('tspan.Btool')
+            .attr("data-html", "true")
+            .attr('data-title', b)
+
+            s = data[0].question3;
+            var a = "<div class= 'btn primary-color'> Question3: </div>";
+            var b = "<ul class='p-0 m-0'>";
+            s.forEach(element => {
+                a = a+"<div class= 'btn btn-default'> "+element+"</div>";
+                b = b+ "<li>"+element+"</li>";
+            });
+            a = a+"</div>";
+            b = b +"</ul>";
+            $("#ques3").html(a);
+            $('tspan.Dtool')
+            .attr("data-html", "true")
+            .attr('data-title', b)
+
+            s = data[0].question4;
+            var a = "<div class= 'btn primary-color'> Question4: </div>";
+            var b = "<ul class='p-0 m-0'>";
+            s.forEach(element => {
+                a = a+"<div class= 'btn btn-default'> "+element+"</div>";
+                b = b+ "<li>"+element+"</li>";
+            });
+            a = a+"</div>";
+            b = b +"</ul>";
+            $("#ques4").html(a);
+            $('tspan.Ctool')
+            .attr("data-html", "true")
+            .attr('data-title', b);
+
+            var vocation = data[0].question4.filter(value => data[0].question3.includes(value))
+            var profession = data[0].question4.filter(value => data[0].question2.includes(value))
+            var passion = data[0].question2.filter(value => data[0].question1.includes(value))
+            var mission = data[0].question1.filter(value => data[0].question3.includes(value))
+            var purpose = data[0].question4.filter(value => data[0].question3.includes(value)&&data[0].question2.includes(value)&&data[0].question1.includes(value))
+            $('tspan.Vocation')
+            .attr("data-html", "true")
+            .attr('data-title', vocation)
+
+            $('tspan.Profession')
+            .attr("data-html", "true")
+            .attr('data-title', profession)
+
+            $('tspan.Passion')
+            .attr("data-html", "true")
+            .attr('data-title', passion)
+
+            $('tspan.Mission')
+            .attr("data-html", "true")
+            .attr('data-title', mission)
+
+            $('tspan.Purpose')
+            .attr("data-html", "true")
+            .attr('data-title', purpose)
+
+            console.log(vocation);
+            console.log(passion);
+        })
+
+        $("#q1").on("change",()=>{
+            var s = $('#q1').val().split(",");
+            var a = "<div class= 'btn primary-color'> Question1: </div>";
+            
+            s.forEach(element => {
+                a = a+"<div class= 'btn btn-default'> "+element+"</div>";
+            });
+            a = a+"</div>"
+            $("#ques1").html(a);
+        })
+        $("#q2").on("change",()=>{
+            var s = $('#q2').val().split(",");
+            var a = "<div class= 'btn primary-color'> Question2: </div>";
+            
+            s.forEach(element => {
+                a = a+"<div class= 'btn btn-default'> "+element+"</div>";
+            });
+            a = a+"</div>";
+            $("#ques2").html(a);
+        })
+        $("#q3").on("change",()=>{
+            var s = $('#q3').val().split(",");
+            var a = "<div class= 'btn primary-color'> Question3: </div>";
+            
+            s.forEach(element => {
+                a = a+"<div class= 'btn btn-default'> "+element+"</div>";
+            });
+            a = a+"</div>";
+            $("#ques3").html(a);
+        })
+        $("#q4").on("change",()=>{
+            var s = $('#q4').val().split(",");
+            var a = "<div class= 'btn primary-color'> Question4: </div>";
+            
+            s.forEach(element => {
+                a = a+"<div class= 'btn btn-default'> "+element+"</div>";
+            });
+            a = a+"</div>";
+            $("#ques4").html(a);
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+    });
+</script>
+
+<style>
+    tspan{
+        cursor: pointer;
+    }
+    ul{
+        list-style-type: none;
+        text-align: left;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row mt-5 pt-5">
+        <div class="col-sm-12 col-md-4 m-0 ">
+            <div class="card">
+
+                <h5 class="card-header info-color white-text text-center py-4">
+                    <strong>Answer these Questions to Find Your Purpose</strong>
+                </h5>
+            
+                <!--Card content-->
+                <div class="card-body px-lg-5">
+                        <%if(typeof success !== undefined && success != ""){%>
+							<div class="alert alert-primary" role="alert">
+									<%=success%>
+							</div>
+						<%}%>
+                    <p class="text-danger">*Seperate each word by comma (,) without any space</p>
+                    <!-- Form -->
+                    <form class="md-form" method="POST" action="/answer" style="color: #757575;">
+
+                        <div class="text-dark">What do you Love ?</div>
+                        <!-- <label for="exampleForm2">Default input</label> -->
+                        <input name="ques1" id="q1" required placeholder="Answer" type="text" id="exampleForm2" class="form-control">
+
+                        <div class="text-dark">What you are good at ?</div>
+                        <!-- <label for="exampleForm2">Default input</label> -->
+                        <input name="ques2" id="q2" required placeholder="Answer" type="text" id="exampleForm2" class="form-control">
+
+                        <div class="text-dark">What the world needs ?</div>
+                        <!-- <label for="exampleForm2">Default input</label> -->
+                        <input name="ques3" id="q3" required placeholder="Answer" type="text" id="exampleForm2" class="form-control">
+
+                        <div class="text-dark">What you can be paid for ?</div>
+                        <!-- <label for="exampleForm2">Default input</label> -->
+                        <input name="ques4" id="q4" required placeholder="Answer" type="text" id="exampleForm2" class="form-control">
+            
+                        <button id="go_ahead" class="btn btn-success btn-block z-depth-0 my-4 waves-effect" type="submit">Go Ahead <i class="fas fa-arrow-right"></i></button>
+            
+                    </form>
+            
+                </div>
+            
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-8 m-0 p-0 text-center"> 
+                <div>
+                    <svg width="600" height="350">
+                        <g class="venn-area venn-circle"  data-venn-sets="D">
+                            <path d="
+                            M 243.57727298505048 118.57745372893443 
+                            m -103.57745372893444 0 
+                            a 103.57745372893444 103.57745372893444 0 1 0 207.1549074578689 0 
+                            a 103.57745372893444 103.57745372893444 0 1 0 -207.1549074578689 0" style="fill-opacity: 0.25; fill: rgb(214, 39, 40); stroke-width: 0; stroke-opacity: 0;"></path>
+                            <text class="label" text-anchor="middle" dy=".35em" x="206" y="81" style="fill: rgb(214, 39, 40);">
+                                <tspan class="Dtool" x="206" y="81" dy="-0.20000000000000007em">What the</tspan>
+                                <tspan class="Dtool" x="206" y="81" dy="0.9em">world needs</tspan>
+                            </text>
+                        </g>
+                        <g class="venn-area venn-circle" data-venn-sets="A">
+                            <path d="
+                        M 243.57749583367956 231.42254627106556 
+                        m -103.57745372893444 0 
+                        a 103.57745372893444 103.57745372893444 0 1 0 207.1549074578689 0 
+                        a 103.57745372893444 103.57745372893444 0 1 0 -207.1549074578689 0" style="fill-opacity: 0.25; fill: rgb(31, 119, 180); stroke-width: 0; stroke-opacity: 0;"></path>
+                        <text class="label" text-anchor="middle" dy=".35em" x="206" y="268" style="fill: rgb(31, 119, 180);">
+                            <tspan  class="Atool" x="206" y="268" dy="0.35em">
+                               What you Love
+                            </tspan>
+                        </text>
+                    </g>
+                    <g class="venn-area venn-circle" data-venn-sets="C">
+                        <path d="
+                        M 356.42252943214464 118.57759204777663 
+                        m -103.57745372893444 0 
+                        a 103.57745372893444 103.57745372893444 0 1 0 207.1549074578689 0 
+                        a 103.57745372893444 103.57745372893444 0 1 0 -207.1549074578689 0" style="fill-opacity: 0.25; fill: rgb(44, 160, 44); stroke-width: 0; stroke-opacity: 0;"></path>
+                        <text class="label" text-anchor="middle" dy=".35em" x="393" y="81" style="fill: rgb(44, 160, 44);">
+                            <tspan  class="Ctool" x="393" y="81" dy="-0.20000000000000007em">
+                                What you can
+                            </tspan>
+                            <tspan  class="Ctool" x="393" y="81" dy="0.9em">
+                                be paid for
+                            </tspan>
+                        </text>
+                    </g>
+                    <g class="venn-area venn-circle" data-venn-sets="B"><path d="
+                        M 356.4227270149495 231.42254627106556 
+                        m -103.57745372893444 0 
+                        a 103.57745372893444 103.57745372893444 0 1 0 207.1549074578689 0 
+                        a 103.57745372893444 103.57745372893444 0 1 0 -207.1549074578689 0" style="fill-opacity: 0.25; fill: rgb(255, 127, 14); stroke-width: 0; stroke-opacity: 0;"></path>
+                        <text class="label" text-anchor="middle" dy=".35em" x="393" y="268" style="fill: rgb(255, 127, 14);">
+                            <tspan  class="Btool" x="393" y="268" dy="-0.20000000000000007em">
+                               What you are
+                            </tspan>
+                            <tspan  class="Btool" x="393" y="268" dy="0.9em">
+                                good at
+                            </tspan>
+                        </text>
+                    </g>
+                    <g class="venn-area venn-intersection" data-venn-sets="A_C">
+                        <path d="
+                        M 253.3026383605703 128.30266204013162 
+                        A 103.57745372893444 103.57745372893444 0 0 1 346.6973869052539 221.69747627871055 
+                        A 103.57745372893444 103.57745372893444 0 0 1 253.3026383605703 128.30266204013162" style="fill-opacity: 0;"></path>
+                        <text class="label" text-anchor="middle" dy=".35em" x="300" y="175" style="fill: rgb(68, 68, 68);">
+                            <tspan x="300" y="175" dy="0.35em"></tspan>
+                        </text>
+                    </g>
+                    <g class="venn-area venn-intersection" data-venn-sets="B_D">
+                        <path d="
+                        M 253.30285287824339 221.6972967113143 
+                        A 103.57745372893444 103.57745372893444 0 0 1 346.69714712175664 128.3027032886857 
+                        A 103.57745372893444 103.57745372893444 0 0 1 253.30285287824339 221.6972967113143" style="fill-opacity: 0;"></path>
+                        <text class="label" text-anchor="middle" dy=".35em" x="300" y="174" style="fill: rgb(68, 68, 68);">
+                            <tspan x="300" y="174" dy="0.35em"></tspan>
+                        </text>
+                    </g>
+                    <g class="venn-area venn-intersection" data-venn-sets="C_D">
+                        <path d="
+                        M 299.9997947400791 205.4381926146524 
+                        A 103.57745372893444 103.57745372893444 0 0 1 300.00000767711606 31.71685316205867 
+                        A 103.57745372893444 103.57745372893444 0 0 1 299.9997947400791 205.4381926146524" style="fill-opacity: 0; stroke-width: 0; stroke-opacity: 0;"></path>
+                        <text class="label" text-anchor="middle" dy=".35em" x="299" y="96" style="fill: rgb(68, 68, 68);">
+                            <tspan class="Vocation" x="299" y="96" dy="0.35em">Vocation</tspan>
+                        </text>
+                    </g>
+                    <g class="venn-area venn-intersection" data-venn-sets="A_B">
+                        <path d="
+                        M 300.0001114243145 318.2832242034936 
+                        A 103.57745372893444 103.57745372893444 0 0 1 300.0001114243145 144.5618683386375 
+                        A 103.57745372893444 103.57745372893444 0 0 1 300.0001114243145 318.2832242034936" style="fill-opacity: 0; stroke-width: 0; stroke-opacity: 0;"></path>
+                        <text class="label" text-anchor="middle" dy=".35em" x="300" y="253" style="fill: rgb(68, 68, 68);">
+                            <tspan class="Passion" x="300" y="253" dy="0.35em">Passion</tspan>
+                        </text>
+                    </g>
+                    <g class="venn-area venn-intersection" data-venn-sets="A_D">
+                        <path d="
+                        M 156.71666144888547 175.0001715342032 
+                        A 103.57745372893444 103.57745372893444 0 0 1 330.4381073698446 174.9998284657968 
+                        A 103.57745372893444 103.57745372893444 0 0 1 156.71666144888547 175.0001715342032" style="fill-opacity: 0; stroke-width: 0; stroke-opacity: 0;"></path>
+                        <text class="label" text-anchor="middle" dy=".35em" x="221" y="175" style="fill: rgb(68, 68, 68);">
+                            <tspan class="Mission" x="221" y="175" dy="0.35em">Mission</tspan>
+                        </text>
+                    </g>
+                    <g class="venn-area venn-intersection" data-venn-sets="B_C">
+                        <path d="
+                        M 269.56186033883046 175.00022124592127 
+                        A 103.57745372893444 103.57745372893444 0 0 1 443.2833961082637 174.9999170729209 
+                        A 103.57745372893444 103.57745372893444 0 0 1 269.56186033883046 175.00022124592127" style="fill-opacity: 0; stroke-width: 0; stroke-opacity: 0;"></path>
+                        <text class="label" text-anchor="middle" dy=".35em" x="378" y="175" style="fill: rgb(68, 68, 68);">
+                            <tspan class="Profession" x="378" y="175" dy="0.35em">Profession</tspan>
+                        </text>
+                    </g>
+                    <g class="venn-area venn-intersection" data-venn-sets="A_C_D">
+                        <path d="
+                        M 253.3026383605703 128.30266204013162 
+                        A 103.57745372893444 103.57745372893444 0 0 1 330.4381073698446 174.9998284657968 
+                        A 103.57745372893444 103.57745372893444 0 0 1 299.9997947400791 205.4381926146524 
+                        A 103.57745372893444 103.57745372893444 0 0 1 253.3026383605703 128.30266204013162" style="fill-opacity: 0;">
+                    </path>
+                    <text class="label" text-anchor="middle" dy=".35em" x="272" y="147" style="fill: rgb(68, 68, 68);">
+                        <tspan x="272" y="147" dy="0.35em"></tspan>
+                    </text>
+                </g>
+                <g class="venn-area venn-intersection" data-venn-sets="B_C_D">
+                    <path d="
+                        M 269.56186033883046 175.00022124592127 
+                        A 103.57745372893444 103.57745372893444 0 0 1 346.69714712175664 128.3027032886857 
+                        A 103.57745372893444 103.57745372893444 0 0 1 299.9997947400791 205.4381926146524 
+                        A 103.57745372893444 103.57745372893444 0 0 1 269.56186033883046 175.00022124592127" style="fill-opacity: 0;">
+                    </path>
+                    <text class="label" text-anchor="middle" dy=".35em" x="327" y="147" style="fill: rgb(68, 68, 68);">
+                        <tspan x="327" y="147" dy="0.35em"></tspan>
+                    </text>
+                </g>
+                <g class="venn-area venn-intersection" data-venn-sets="A_B_D">
+                    <path d="
+                        M 253.30285287824339 221.6972967113143 
+                        A 103.57745372893444 103.57745372893444 0 0 1 300.0001114243145 144.5618683386375 
+                        A 103.57745372893444 103.57745372893444 0 0 1 330.4381073698446 174.9998284657968 
+                        A 103.57745372893444 103.57745372893444 0 0 1 253.30285287824339 221.6972967113143" style="fill-opacity: 0; stroke-width: 0; stroke-opacity: 0;"></path>
+                        <text class="label" text-anchor="middle" dy=".35em" x="272" y="202" style="fill: rgb(68, 68, 68);">
+                            <tspan x="272" y="202" dy="0.35em"></tspan>
+                        </text>
+                    </g>
+                    <g class="venn-area venn-intersection" data-venn-sets="A_B_C">
+                        <path d="
+                        M 300.0001114243145 144.5618683386375 
+                        A 103.57745372893444 103.57745372893444 0 0 1 346.6973869052539 221.69747627871055 
+                        A 103.57745372893444 103.57745372893444 0 0 1 269.56186033883046 175.00022124592127 
+                        A 103.57745372893444 103.57745372893444 0 0 1 300.0001114243145 144.5618683386375" style="fill-opacity: 0; stroke-width: 0; stroke-opacity: 0;"></path>
+                        <text class="label" text-anchor="middle" dy=".35em" x="327" y="202" style="fill: rgb(68, 68, 68);">
+                            <tspan x="327" y="202" dy="0.35em"></tspan>
+                        </text>
+                    </g>
+                    <g class="venn-area venn-intersection" data-venn-sets="A_B_C_D"><path d="
+                        M 269.56186033883046 175.00022124592127 
+                        A 103.57745372893444 103.57745372893444 0 0 1 300.0001114243145 144.5618683386375 
+                        A 103.57745372893444 103.57745372893444 0 0 1 330.4381073698446 174.9998284657968 
+                        A 103.57745372893444 103.57745372893444 0 0 1 299.9997947400791 205.4381926146524 
+                        A 103.57745372893444 103.57745372893444 0 0 1 269.56186033883046 175.00022124592127" style="fill-opacity: 0; stroke-width: 0; stroke-opacity: 0;"></path>
+                        <text class="label" text-anchor="middle" dy=".35em" x="300" y="174" style="fill: rgb(68, 68, 68);">
+                            <tspan class="Purpose" x="300" y="174" dy="0.35em">Purpose</tspan>
+                        </text>
+                    </g>
+                </svg>
+                </div>
+                <div class="ml-5">
+                    <div id="ques1" class="text-left "></div>
+                    <div id="ques2" class="text-left"></div>
+                    <div id="ques3" class="text-left"></div>
+                    <div id="ques4" class="text-left"></div>
+                </div>
+        </div>
+    </div>
+
+   
+</div>

@@ -1,0 +1,25 @@
+<%- include partials/header.ejs %>
+
+<script>
+    $.get("/ansother").done((data)=>{
+        var users = data;
+        users.forEach(element => {
+            $(".ans").append("<div class='card m-2 p-2' id="+element.username+"></div>")
+            $.post("/ansother",{id:element._id}).done((res)=>{
+                res.forEach(ele=>{
+                    var se = "#"+element.username;
+                    console.log(ele)
+                    $(se).append("<div style='margin:0 auto;font-weight:bold'><i class='fas fa-user-alt'></i> User Name: "+element.username+"</div><hr class='mx-auto' style='width:50%'>")
+                    $(se).append("<div class='note note-danger'><strong>What do you Love ?</strong><br>"+ele.question1+"</div>")
+                    // $(se).append("<div style='font-size:0.9rem; font-weight:normal;'>"+ele.question1+"</div><hr>")
+                    $(se).append("<div class='note note-primary'><strong>What are you good at ?</strong><br>"+ele.question1+"</div>")
+                    $(se).append("<div class='note note-secondary'><strong>What the world needs ?</strong><br>"+ele.question1+"</div>")
+                    $(se).append("<div class='note note-success'><strong>What you can be paid for ?</strong><br>"+ele.question1+"</div>")
+                })
+            })
+        });
+    })
+</script>
+<div class="ans mt-5 pt-5 col-md-6 mx-auto">
+
+</div>

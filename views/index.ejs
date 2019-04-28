@@ -1,0 +1,191 @@
+<%- include partials/header.ejs %>
+<div class="container-fluid">
+	<div class="row mt-5 pt-5">
+		<div class="col-sm-12 col-md-6 mx-auto">
+			<div type="div" class="container">
+				<div class="row p-3">	
+					<div class="col">
+						<button type="button" class="btn btn-primary mx-auto" data-toggle="modal" data-target="#filter">
+								<i class="fas fa-filter"></i> Filter
+						</button>
+					</div>
+					<div class="col">
+						<button type="button" class="btn btn-primary mx-auto" data-toggle="modal" data-target="#sort">
+								<i class="fas fa-filter"></i> Sort
+						</button>
+					</div>
+				</div>
+			</div>
+			<div id="list" class="list-group">
+					<% jobs.forEach(function(user,index){ %>
+						<%if (user.applicant.indexOf(currentuser.username) === -1) {%>
+						<div id="job<%=index%>" class="list-group-item list-group-item-action">
+								<div class="h6"> Position: <%=user.title%>
+									<form method="POST" action="/apply">
+										<input name="id" hidden value="<%=user._id%>">
+										<button type="submit" class="btn btn-primary mx-auto float-right" id="<%=user._id%>">
+												Apply
+										</button>
+									</form>
+							</div> <b>Stipend:</b> $<%=user.stipend%> <b>Type:</b> <%=user.type%>
+								<p>
+									<a data-toggle="collapse" href="#collapseExample<%=index%>" role="button" aria-expanded="false" aria-controls="collapseExample">
+										View More
+									</a>
+								</p>
+								<div class="collapse" id="collapseExample<%=index%>">
+									<div class="card card-body">
+											Location: <%=user.location%><hr>
+											Description: <%=user.about%>
+									</div>
+								</div>
+
+						</div>
+						<%}%>
+					<%});%>
+				</div>
+			</div>
+	</div>
+  </div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="filter" tabindex="-1" role="dialog" aria-labelledby="filter"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Filter</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form id="fiterform" class="modal-body">
+					<select name="loc" class="loc browser-default custom-select m-2">
+						<option selected>Location</option>
+						<%var set1 = new Set();
+						jobs.forEach(function(user){
+							if(!set1.has(user.location)){
+								set1.add(user.location)%>
+								<option value="<%=user.location%>"><%=user.location%></option>
+
+						<%}%>
+						<%})%>
+					</select>
+					<select name="type" class="type browser-default custom-select m-2">
+							<option selected>Type</option>
+							<%var set1 = new Set();
+							jobs.forEach(function(user){
+								if(!set1.has(user.type)){
+									set1.add(user.type)%>
+									<option value="<%=user.type%>"><%=user.type%></option>
+
+							<%}%>
+							<%})%>
+						</select>
+					</form>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" id="btnfil" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<!-- Modal -->
+	<div class="modal fade" id="sort" tabindex="-1" role="dialog" aria-labelledby="sort"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Sort By</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form id="sortform" class="modal-body">
+					<div class="custom-control custom-radio">
+							<input type="radio" name="sortStipend" value="0" class="custom-control-input" id="stiINC">
+							<label class="custom-control-label" for="stiINC">Stipend Increasing</label>
+					</div>
+					<div class="custom-control custom-radio">
+							<input type="radio" name="sortStipend" value="1" class="custom-control-input" id="stiDEC">
+							<label class="custom-control-label" for="stiDEC">Stipend decreasing</label>
+					</div>
+				</form>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" id="sortt" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(()=>{
+			$("#sortt").on("click",()=>{
+				var sort = $("input[name='sortStipend']:checked").val();
+				$.post("/sortjob").done((data)=>{	
+					var fin="";
+					if(sort==1){
+						data = data.reverse();
+					}
+						data.forEach((user,index) => {
+							fin = fin + `<div id="job`+index+`" class="list-group-item list-group-item-action">
+							<div class="h6"> Position: `+user.title+`</div> <b>Stipend:</b> $`+user.stipend+` <b>Type:</b> $`+user.type+`
+							<p>
+								<a data-toggle="collapse" href="#collapseExample`+index+`" role="button" aria-expanded="false" aria-controls="collapseExample">
+									View More
+								</a>
+							</p>
+							<div class="collapse" id="collapseExample`+index+`">
+								<div class="card card-body">
+										Location: `+user.location+`<hr>
+										Description: `+user.about+`
+								</div>
+							</div>
+
+					</div>`;
+						});
+						$("#list").html(fin);
+						$(".close").trigger("click")
+				})
+			})
+
+			$("#btnfil").on("click",()=>{
+				var typeval = $("select.type").children("option:selected").val();
+				var locval = $("select.loc").children("option:selected").val();
+				if(typeval == "Type"&&locval=="Location"){
+					alert("Select any option")
+				}else{
+					$.post("/jobfil",{typeval:typeval,locval:locval}).done((data)=>{
+					var fin="";
+					data.forEach((user,index) => {
+						fin = fin + `<div id="job`+index+`" class="list-group-item list-group-item-action">
+						<div class="h6"> Position: `+user.title+`</div> <b>Stipend:</b> $`+user.stipend+` <b>Type:</b> $`+user.type+`
+						<p>
+							<a data-toggle="collapse" href="#collapseExample`+index+`" role="button" aria-expanded="false" aria-controls="collapseExample">
+								View More
+							</a>
+						</p>
+						<div class="collapse" id="collapseExample`+index+`">
+							<div class="card card-body">
+									Location: `+user.location+`<hr>
+									Description: `+user.about+`
+							</div>
+						</div>
+
+					</div>`;
+						});
+						$("#list").html(fin);
+						$(".close").trigger("click")
+					})
+				}
+
+				typeval = "";
+				locval = "";
+			})
+
+			//  
+		})
+	</script>

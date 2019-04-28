@@ -1,0 +1,161 @@
+<!--Navbar -->
+<nav class="mb-1 navbar navbar-dark  blue lighten-1 fixed-bottom">
+    <ul class="navbar-nav ml-auto mx-auto nav-flex-icons">
+      <li class="nav-item ml-5 mr-5">
+        <a data-toggle="modal" data-target="#post" class="nav-link waves-effect waves-light">
+          <i class="far fa-plus-square fa-2x"></i>
+        </a>
+      </li>
+      <li class="nav-item ml-5 mr-5">
+        <a class="nav-link waves-effect waves-light" href="/user">
+          <i class="fas fa-user fa-2x"></i>
+        </a>
+      </li>
+      <li class="nav-item dropdown ml-5 mr-5">
+        <div class="dropup">
+          <a class="nav-link waves-effect waves-light dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="fas fa-phone fa-2x"></i></a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+              <a class="dropdown-item" href="#">About Us</a>
+              <a class="dropdown-item" href="/logout">Contact Us</a>
+            </div>
+          </div>
+        </li>
+    </ul>
+  </div>
+</nav>
+<!--/.Navbar -->
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#fullHeightModalRight">
+  Launch demo modal
+</button>
+ -->
+
+<!-- Full Height Modal Right -->
+<div class="modal fade top" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+  <div class="modal-dialog modal-full-height modal-top" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class=" h5 modal-title w-100" id="myModalLabel">Post an image</div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form class="border border-light p-5 col-sm-12 col-md-7 col-lg-5 mx-auto" action="/post" method="POST">
+
+            <div class="form-group row">
+            <!-- Material input -->
+            <label for="Username" class="col-sm-2 col-form-label"><i class="far fa-envelope"></i></label>
+            <div class="col-sm-10">
+              <div class="md-form mt-0">
+                <input type="text" class="form-control" id="newcaption" name="newcaption" placeholder="Enter Caption">
+              </div>
+            </div>
+          </div>
+
+           <div class="form-group row">
+            <!-- Material input -->
+          <select class="custom-select">
+          <option selected>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+
+          </div
+          <div class="form-group row">
+           <!-- Material input -->
+           <label for="Username" class="col-sm-2 col-form-label"><i class="fas fa-at prefix"></i></label>
+           <div class="col-sm-10">
+             <div class="md-form mt-0">
+               <input type="text" class="form-control" id="image" name="image" placeholder="Image Url">
+             </div>
+           </div>
+         </div>
+
+
+           <div class="form-group row">
+            <!-- Material input -->
+            <label for="Username" class="col-sm-2 col-form-label"><i class="far fa-comment-alt prefix"></i></label>
+            <div class="col-sm-10">
+              <div class="md-form mt-0">
+                <input type="text" class="form-control" id="newdescription" name="newdescription" placeholder="Enter Message">
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+            </div>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input disabled" name="img" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" disabled>
+              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+      <div class="modal-footer justify-content-center">
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+        <button type="submit" class="btn btn-primary">POST</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Full Height Modal Right -->
+
+
+<div id="post" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>Post an image</div>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body d-flex flex-grow-1">
+
+          <form action="/post" method="POST">
+
+            <div class="form-group">
+                <label for="caption">Enter Caption</label>
+                <input type="text" required name="newcaption" class="form-control" id="exampleFormControlFile1">
+              </div>
+
+            <div class="form-group">
+              <label for="photo">Upload</label>
+              <input type="file"disabled name="img" class="form-control-file" id="photo">
+            </div>
+            <div class="form-group">
+                <label for="photo">Image URL</label>
+                <input type="text" required name="image" class="form-control-file" id="photo">
+              </div>
+
+            <div class="form-group">
+              <label for="message">Enter Message</label>
+              <input type="text" required name="newdescription" class="form-control" id="exampleFormControlFile1">
+            </div>
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Post</button>
+        </div>
+      </form>
+      </div>
+
+    </div>
+  </div>

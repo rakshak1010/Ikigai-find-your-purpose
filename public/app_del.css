@@ -1,0 +1,74 @@
+.thumbnail img{
+	width:100%;
+	height:85%;
+}
+
+.thumbnail{
+	padding:0;
+	padding-bottom: 5px;
+	height:95%;
+
+}
+
+.home{
+	background-image: url(alexa.jpg);
+	background-position: top 10%;
+	background-repeat: no-repeat;
+	background-size:cover;
+	position: absolute;
+	top: 0;
+	left:0;
+	width:100%;
+	height: 100%;
+	z-index: -1;
+	
+}
+.navHome{
+	position:relative;
+	background-color:transparent;
+	border:none;
+}
+.caption h4{
+	margin:0;
+}
+
+.caption-full{
+	padding:4px;
+}
+.col.lg-3{
+	margin-bottom: 50px;
+	
+}
+
+
+#deleteform{
+	display: inline;
+}
+
+#deletecomment{
+	display:inline;
+}
+.pagename{
+	text-shadow: 2px 0px 1px grey;
+}
+
+
+
+@keyframes yo{
+	0%{
+		transform:scale(1)
+
+	}
+	100%{
+		transform:scale(1.1)  rotate(30deg);
+		/* transform: rotate(30deg) */
+	}
+	
+}
+
+.fas{
+	animation-name: yo;
+	animation-duration: 1s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}

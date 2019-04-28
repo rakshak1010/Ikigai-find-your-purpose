@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ikigai: The Purpose Principle</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.1/css/mdb.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.1/js/mdb.min.js"></script>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Lobster');
+        .shdw{
+            -webkit-box-shadow: 2px 4px 20px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 4px 20px -4px rgba(0,0,0,0.75);
+box-shadow: 2px 4px 20px -4px rgba(0,0,0,0.75);
+        }
+    </style>
+  </head>
+  <body>
+
+
+
+    <!--Navbar -->
+  <nav class="mb-1 navbar navbar-expand-lg navbar-dark primary-color fixed-top">
+    <a class="navbar-brand" href="/" style="font-family: 'Lobster', cursive;
+    ">
+        Ikigai: The Purpose Principle
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+      aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+      <ul class="navbar-nav ml-auto">
+        <% if(!currentuser){ %>
+        <li class="nav-item active pr-2">
+          <a class="nav-link" href="/login">
+              Login
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" data-toggle="modal" data-target="#sideModalTR">
+            <i class="fas fa-info"></i>
+            Info
+            </a>
+        </li>
+        <% } else{ %>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">
+              Signed in as <%=currentuser.username%>
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="fas fa-user"></i> Profile </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+              <a class="dropdown-item" href="/">My account</a>
+              <a class="dropdown-item" href="/other">Other Users</a>
+              <a class="dropdown-item" href="/logout">Log out</a>
+            </div>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" data-toggle="modal" data-target="#sideModalTR">
+              <i class="fas fa-info"></i>
+              Info
+              </a>
+          </li>
+        <%}%>
+      </ul>
+    </div>
+  </nav>
+  <!--/.Navbar -->
+
+
+  <!-- Side Modal Top Right -->
+
+<!-- To change the direction of the modal animation change .right class -->
+<div class="modal fade right" id="sideModalTR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+
+<!-- Add class .modal-side and then add class .modal-top-right (or other classes from list above) to set a position to the modal -->
+<div class="modal-dialog modal-side modal-top-right" role="document">
+
+
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title w-100" id="myModalLabel">About</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Ikigai is a Japanese concept that means "a reason for being." The Purpose Principle combines the four elements that a life of meaning and impact should have:
+have a job that you love, you are good at, you get paid for it and it makes the world a better place.
+These four elements combined will give you purpose and direction in your life
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Side Modal Top Right -->

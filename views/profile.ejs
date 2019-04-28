@@ -1,0 +1,34 @@
+<%- include partials/header.ejs %>
+<div class="container-fluid">
+	<div class="row mt-5 pt-5">
+		<div class="col-sm-12 col-md-6 mx-auto">
+			<div id="list" class="list-group">
+                <%=job%>
+					<% job.forEach(function(user,index){ %>
+						<div id="job<%=index%>" class="list-group-item list-group-item-action">
+								<div class="h6"> Position: <%=user.title%>
+									<form method="POST" action="/apply">
+										<input name="id" hidden value="<%=user._id%>">
+										<button type="submit" class="btn btn-primary mx-auto float-right" id="<%=user._id%>">
+												Apply
+										</button>
+									</form>
+							</div> <b>Stipend:</b> $<%=user.stipend%> <b>Type:</b> <%=user.type%>
+								<p>
+									<a data-toggle="collapse" href="#collapseExample<%=index%>" role="button" aria-expanded="false" aria-controls="collapseExample">
+										View More
+									</a>
+								</p>
+								<div class="collapse" id="collapseExample<%=index%>">
+									<div class="card card-body">
+											Location: <%=user.location%><hr>
+											Description: <%=user.about%>
+									</div>
+								</div>
+
+						</div>
+					<%});%>
+				</div>
+			</div>
+	</div>
+  </div>
