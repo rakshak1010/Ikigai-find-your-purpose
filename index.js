@@ -11,7 +11,7 @@ app.use(express.static("public"));
 
 
 var mongoose=require("mongoose");
-mongoose.connect("mongodb://sid:sid123@ds127825.mlab.com:27825/intern", { useNewUrlParser: true });
+mongoose.connect("mongodb://sid:sid123@ds127825.mlab.com:27825/hack", { useNewUrlParser: true });
 mongoose.connection.on('error',function(error){
   console.error("Error Occured in DB",error);
 });
